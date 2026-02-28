@@ -1,0 +1,128 @@
+:root {
+    --gold-dark: #8c6a1d;
+    --gold: #c9a227;
+    --gold-light: #e6c65c;
+    --bg-dark: #0f0f0f;
+    --bg-section: #161616;
+    --text-light: #f5f5f5;
+    --text-muted: #bfbfbf;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, #111 0%, #1c1c1c 100%);
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--gold-dark);
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+}
+
+nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: var(--gold-light);
+}
+
+.hero {
+    padding: 140px 60px;
+    text-align: center;
+    background: linear-gradient(135deg, #141414 0%, #1f1a12 100%);
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    margin-bottom: 20px;
+    color: var(--gold-light);
+}
+
+.hero p {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    color: var(--text-muted);
+}
+
+.btn {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    padding: 14px 32px;
+    color: #111;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+section {
+    padding: 100px 60px;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+}
+
+.card {
+    background: #1c1c1c;
+    padding: 30px;
+    border: 1px solid var(--gold-dark);
+}
+
+.card h3 {
+    color: var(--gold-light);
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: var(--text-muted);
+}
+
+footer {
+    background: #111;
+    padding: 30px;
+    text-align: center;
+    border-top: 1px solid var(--gold-dark);
+    color: var(--text-muted);
+}
+
+.page-header {
+    padding: 120px 60px 60px;
+    text-align: center;
+    background: var(--bg-section);
+}
+
+.page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    color: var(--gold-light);
+}
