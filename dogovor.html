@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умный подбор — Договор оферты</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Специфичные стили только для страницы договора в стиле Умный подбор */
+        .contract-page {
+            background: var(--deep-ebony);
+            min-height: 100vh;
+        }
+
+        /* Hero секция в премиальном стиле */
+        .contract-hero {
+            background: linear-gradient(135deg, var(--rich-black), var(--deep-ebony));
+            padding: 80px 0 60px;
+            color: var(--cream);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .contract-hero::before {
+            content: "";
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(184, 155, 122, 0.1) 0%, rgba(0,0,0,0) 70%);
+            top: -300px;
+            right: -200px;
+            border-radius: 50%;
+        }
+
+        .contract-hero::after {
+            content: "⚜️";
+            position: absolute;
+            bottom: 20px;
+            left: 30px;
+            font-size: 120px;
+            opacity: 0.03;
+            transform: rotate(15deg);
+        }
+
+        .contract-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contract-hero h1 span {
+            color: var(--medium-gold);
+            border-bottom: 2px solid var(--dark-gold);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .contract-hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            color: var(--pale-gold);
+        }
+
+        .contract-container {
+            max-width: 1200px;
+            margin: 60px auto 80px;
+            padding: 0 20px;
+        }
+
+        /* Карточка с PDF в премиум стиле */
+        .contract-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            overflow: hidden;
+            margin-bottom: 50px;
+            box-shadow: var(--shadow);
+        }
+
+        .contract-card-header {
+            padding: 30px 35px;
+            background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(10, 10, 10, 0.95));
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .contract-card-header .icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--deep-ebony);
+            font-size: 28px;
+            box-shadow: 0 10px 20px rgba(184, 155, 122, 0.3);
+        }
+
+        .contract-card-header h2 {
+            margin: 0 0 5px 0;
+            text-align: left;
+            font-size: 26px;
+            color: var(--light-gold);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .contract-card-header p {
+            color: var(--pale-gold);
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .pdf-container {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            background: var(--rich-black);
+        }
+
+        #pdfLoader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--rich-black);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(184, 155, 122, 0.2);
+            border-top-color: var(--medium-gold);
+            border-right-color: var(--medium-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 25px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #pdfFrame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Форма для реквизитов */
+        .form-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-title {
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: var(--light-gold);
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .form-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--gold-gradient);
+            border-radius: 2px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 5px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--light-gold);
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            color: var(--cream);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--medium-gold);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 4px rgba(184, 155, 122, 0.15);
+            outline: none;
+        }
+
+        .form-group input::placeholder {
+            color: var(--pale-gold);
+            opacity: 0.5;
+        }
+
+        .field-hint {
+            font-size: 12px;
+            color: var(--pale-gold);
+            opacity: 0.7;
+            margin-top: 6px;
+            padding-left: 5px;
+        }
+
+        .checkbox-group {
+            grid-column: span 2;
+            background: rgba(184, 155, 122, 0.08);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 20px 0 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .checkbox-group input {
+            width: 22px;
+            height: 22px;
+            margin-top: 3px;
+            accent-color: var(--medium-gold);
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-weight: 400;
+            color: var(--pale-gold);
+            line-height: 1.6;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-group label strong {
+            color: var(--light-gold);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .btn-contract {
+            grid-column: span 2;
+            background: var(--gold-gradient);
+            color: var(--deep-ebony);
+            border: none;
+            padding: 18px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            margin-top: 25px;
+            box-shadow: 0 10px 25px rgba(184, 155, 122, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background-size: 200% auto;
+        }
+
+        .btn-contract:hover {
+            background-position: right center;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(184, 155, 122, 0.4);
+        }
+
+        /* Уведомление об успехе */
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--rich-black);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            z-index: 10000;
+            text-align: center;
+            max-width: 500px;
+            animation: slideUp 0.5s ease;
+            border: 1px solid var(--medium-gold);
+            backdrop-filter: blur(10px);
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 40px;
+            color: var(--deep-ebony);
+            box-shadow: 0 10px 25px rgba(184, 155, 122, 0.3);
+        }
+
+        .success-message h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: var(--light-gold);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .success-message p {
+            color: var(--pale-gold);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .success-message .highlight {
+            background: rgba(184, 155, 122, 0.15);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--glass-border);
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .btn-close {
+            background: transparent;
+            border: 2px solid var(--medium-gold);
+            color: var(--light-gold);
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        .btn-close:hover {
+            background: var(--medium-gold);
+            color: var(--deep-ebony);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -30%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        /* Дополнительная информация */
+        .contract-info {
+            background: rgba(184, 155, 122, 0.05);
+            border-left: 4px solid var(--medium-gold);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .contract-info-icon {
+            font-size: 24px;
+            color: var(--medium-gold);
+        }
+
+        .contract-info-text p {
+            color: var(--pale-gold);
+            margin-bottom: 5px;
+            line-height: 1.6;
+        }
+
+        .contract-info-text strong {
+            color: var(--light-gold);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .contract-hero h1 {
+                font-size: 38px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width,
+            .checkbox-group,
+            .btn-contract {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contract-hero {
+                padding: 60px 0 40px;
+            }
+
+            .contract-hero h1 {
+                font-size: 32px;
+            }
+
+            .contract-container {
+                margin: 40px auto 60px;
+            }
+
+            .pdf-container {
+                height: 500px;
+            }
+
+            .contract-card-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px;
+            }
+
+            .form-card {
+                padding: 30px;
+            }
+
+            .checkbox-group {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+            }
+
+            .success-message {
+                width: 90%;
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pdf-container {
+                height: 400px;
+            }
+
+            .form-title {
+                font-size: 26px;
+            }
+
+            .btn-contract {
+                font-size: 16px;
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Хедер (такой же как на других страницах) -->
+<header class="header" id="header">
+    <div class="container header-container">
+        <a href="index.html" class="logo">Умный<span> подбор</span></a>
+
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="about.html" class="nav-link">О компании</a>
+            <a href="contacts.html" class="nav-link">Контакты</a>
+        </nav>
+
+        <a href="contacts.html" class="header-cta">Связаться</a>
+
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Мобильная навигация -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="index.html" class="nav-link">Главная</a>
+        <a href="about.html" class="nav-link">О компании</a>
+        <a href="contacts.html" class="nav-link">Контакты</a>
+    </div>
+</header>
+
+<main class="contract-page">
+    <!-- Hero секция -->
+    <section class="contract-hero">
+        <div class="container">
+            <h1><span>Договор оферты</span></h1>
+            <p>Ознакомьтесь с условиями сотрудничества и заполните реквизиты для акцепта</p>
+        </div>
+    </section>
+
+    <div class="contract-container">
+        <!-- Информационный блок -->
+        <div class="contract-info fade-up">
+            <div class="contract-info-icon">⚜️</div>
+            <div class="contract-info-text">
+                <p><strong>Уважаемые партнеры!</strong> Перед подписанием договора пожалуйста внимательно ознакомьтесь с условиями. После заполнения формы и акцепта договора, копия будет автоматически направлена на указанный вами email.</p>
+            </div>
+        </div>
+
+        <!-- Блок с PDF договором -->
+        <div class="contract-card fade-up">
+            <div class="contract-card-header">
+                <div class="icon">📄</div>
+                <div>
+                    <h2>Договор на оказание услуг по подбору персонала</h2>
+                    <p>Версия от 01.03.2026 • Актуально на текущую дату</p>
+                </div>
+            </div>
+
+            <div class="pdf-container">
+                <div id="pdfLoader">
+                    <div class="loader"></div>
+                    <p style="color: var(--pale-gold);">Загружаем договор...</p>
+                </div>
+
+                <!-- Здесь ЗАМЕНИТЕ ссылку на ваш PDF -->
+                <iframe
+                        id="pdfFrame"
+                        src="https://docs.google.com/viewer?url=https://www.umnyipodbor.ru/doc/dogovor.pdf&embedded=true&toolbar=0&navpanes=0&hl=ru"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; opacity: 0; transition: opacity 0.3s;"
+                        onload="document.getElementById('pdfLoader').style.display='none'; this.style.opacity='1';"
+                        title="Договор оферты Умный подбор"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Форма для реквизитов -->
+        <div class="form-card fade-up">
+            <h2 class="form-title">Реквизиты для акцепта</h2>
+
+            <form id="contractForm">
+                <div class="form-grid">
+                    <!-- ИП / Юридическое лицо -->
+                    <div class="form-group full-width">
+                        <label for="companyName">Наименование организации / ИП *</label>
+                        <input type="text" id="companyName" name="companyName" placeholder="ООО «Компания» или ИП Иванов И.И." required>
+                        <div class="field-hint">Полное наименование согласно учредительным документам</div>
+                    </div>
+
+                    <!-- ИНН -->
+                    <div class="form-group">
+                        <label for="inn">ИНН *</label>
+                        <input type="text" id="inn" name="inn" placeholder="10 или 12 цифр" maxlength="12" required>
+                        <div class="field-hint">Идентификационный номер налогоплательщика</div>
+                    </div>
+
+                    <!-- КПП (для юрлиц) -->
+                    <div class="form-group">
+                        <label for="kpp">КПП</label>
+                        <input type="text" id="kpp" name="kpp" placeholder="9 цифр (для ООО)">
+                        <div class="field-hint">Для ИП не заполняется</div>
+                    </div>
+
+                    <!-- Телефон -->
+                    <div class="form-group">
+                        <label for="phone">Контактный телефон *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+7 (965) 583-05-66" required>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" placeholder="umnyi.podbor@mail.ru" required>
+                    </div>
+
+                    <!-- Юридический адрес -->
+                    <div class="form-group full-width">
+                        <label for="legalAddress">Юридический адрес *</label>
+                        <input type="text" id="legalAddress" name="legalAddress" placeholder="127018, г. Москва, ул. Краснопролетарская, д. 36" required>
+                    </div>
+
+                    <!-- Расчётный счёт -->
+                    <div class="form-group">
+                        <label for="account">Расчётный счёт *</label>
+                        <input type="text" id="account" name="account" placeholder="20 цифр" maxlength="20" required>
+                    </div>
+
+                    <!-- БИК -->
+                    <div class="form-group">
+                        <label for="bik">БИК *</label>
+                        <input type="text" id="bik" name="bik" placeholder="044525225" maxlength="9" required>
+                    </div>
+
+                    <!-- Банк -->
+                    <div class="form-group full-width">
+                        <label for="bank">Наименование банка *</label>
+                        <input type="text" id="bank" name="bank" placeholder="ПАО Сбербанк" required>
+                    </div>
+
+                    <!-- Корр. счёт -->
+                    <div class="form-group">
+                        <label for="corrAccount">Корреспондентский счёт *</label>
+                        <input type="text" id="corrAccount" name="corrAccount" placeholder="30101810400000000225" maxlength="20" required>
+                    </div>
+
+                    <!-- Директор / Представитель -->
+                    <div class="form-group">
+                        <label for="director">Руководитель *</label>
+                        <input type="text" id="director" name="director" placeholder="Иванов Иван Иванович" required>
+                    </div>
+
+                    <!-- Должность руководителя -->
+                    <div class="form-group">
+                        <label for="directorPosition">Должность руководителя</label>
+                        <input type="text" id="directorPosition" name="directorPosition" value="Генеральный директор">
+                    </div>
+
+                    <!-- Блок согласия -->
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <label for="consent">
+                            <strong>Я подтверждаю, что ознакомился с условиями договора оферты</strong>
+                            Полностью согласен с условиями и акцептую договор. Также даю согласие на обработку персональных данных в соответствии с Федеральным законом № 152-ФЗ «О персональных данных».
+                        </label>
+                    </div>
+
+                    <!-- Кнопка отправки -->
+                    <button type="submit" class="btn-contract">Подписать договор и отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<!-- Футер -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <a href="index.html" class="footer-logo">Умный<span> подбор</span></a>
+                <p>Премиальное агентство по подбору персонала. Находим лучших специалистов для ведущих компаний с 2012 года.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">in</a>
+                    <a href="#" class="social-link">tg</a>
+                    <a href="#" class="social-link">wa</a>
+                </div>
+            </div>
+
+            <div>
+                <h3>Меню</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О компании</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="dogovor.html">Договор</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Услуги</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Executive Search</a></li>
+                    <li><a href="#">Подбор специалистов</a></li>
+                    <li><a href="#">Аудит HR</a></li>
+                    <li><a href="#">Аутстаффинг</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Контакты</h3>
+                <div class="footer-contacts">
+                    <p>📞 Максим: <a href="tel:+79655830566">8 (965) 583-05-66</a></p>
+                    <p>📞 Офис: <a href="tel:+79655830566">8 (965) 583-05-66</a></p>
+                    <p>✉️ <a href="mailto:umnyi.podbor@mail.ru">umnyi.podbor@mail.ru</a></p>
+                    <p>📱 Telegram: <a href="https://t.me/+79655830564">8 (965) 583-05-64</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Умный подбор. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Бургер меню
+        const burger = document.getElementById('burger');
+        const mobileNav = document.getElementById('mobileNav');
+
+        if (burger && mobileNav) {
+            burger.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+                burger.classList.toggle('active');
+            });
+        }
+
+        // Анимация при скролле
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Обработка формы договора
+        const form = document.getElementById('contractForm');
+
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Сбор данных
+                const formData = {
+                    companyName: document.getElementById('companyName').value.trim(),
+                    inn: document.getElementById('inn').value.trim(),
+                    kpp: document.getElementById('kpp')?.value.trim() || '',
+                    phone: document.getElementById('phone').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    legalAddress: document.getElementById('legalAddress').value.trim(),
+                    account: document.getElementById('account').value.trim(),
+                    bik: document.getElementById('bik').value.trim(),
+                    bank: document.getElementById('bank').value.trim(),
+                    corrAccount: document.getElementById('corrAccount').value.trim(),
+                    director: document.getElementById('director').value.trim(),
+                    directorPosition: document.getElementById('directorPosition').value.trim(),
+                    consent: document.getElementById('consent').checked,
+                    timestamp: new Date().toLocaleString('ru-RU')
+                };
+
+                // Проверка обязательных полей
+                for (let key in formData) {
+                    if (key !== 'kpp' && key !== 'consent' && key !== 'directorPosition' && typeof formData[key] === 'string' && !formData[key]) {
+                        alert('Пожалуйста, заполните все обязательные поля');
+                        return;
+                    }
+                }
+
+                // Валидация ИНН
+                const inn = formData.inn;
+                if (!/^\d{10}$/.test(inn) && !/^\d{12}$/.test(inn)) {
+                    alert('ИНН должен содержать 10 или 12 цифр');
+                    return;
+                }
+
+                // Валидация БИК (9 цифр)
+                if (!/^\d{9}$/.test(formData.bik)) {
+                    alert('БИК должен состоять из 9 цифр');
+                    return;
+                }
+
+                // Валидация расчетного счета (20 цифр)
+                if (!/^\d{20}$/.test(formData.account)) {
+                    alert('Расчетный счет должен состоять из 20 цифр');
+                    return;
+                }
+
+                // Валидация корр. счета (20 цифр)
+                if (!/^\d{20}$/.test(formData.corrAccount)) {
+                    alert('Корреспондентский счет должен состоять из 20 цифр');
+                    return;
+                }
+
+                // Валидация email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(formData.email)) {
+                    alert('Введите корректный email');
+                    return;
+                }
+
+                // Если всё ок — показываем успех
+                showSuccessMessage(formData);
+
+                // Логируем в консоль (для отладки)
+                console.log('Данные договора:', formData);
+
+                // Здесь можно добавить отправку на сервер
+            });
+        }
+
+        function showSuccessMessage(data) {
+            // Создаём сообщение об успехе
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'success-message';
+
+            const shortName = data.companyName.length > 30
+                ? data.companyName.substring(0, 30) + '...'
+                : data.companyName;
+
+            const requestNumber = 'УП-' + Math.floor(Math.random() * 10000);
+
+            messageDiv.innerHTML = `
+                    <div class="success-icon">✓</div>
+                    <h3>Договор подписан!</h3>
+                    <p><strong>${shortName}</strong>, благодарим за сотрудничество!</p>
+                    <div class="highlight">
+                        📋 Номер заявки: ${requestNumber}<br>
+                        📅 ${new Date().toLocaleDateString('ru-RU')}
+                    </div>
+                    <p style="color: var(--light-gold);">Копия договора направлена на<br><strong>${data.email}</strong></p>
+                    <button class="btn-close" onclick="this.closest('.success-message').remove()">Закрыть</button>
+                `;
+
+            document.body.appendChild(messageDiv);
+
+            // Автоматически убираем через 10 секунд
+            setTimeout(() => {
+                if (messageDiv.parentElement) {
+                    messageDiv.remove();
+                }
+            }, 10000);
+        }
+
+        // Обработка ошибки загрузки PDF
+        const pdfFrame = document.getElementById('pdfFrame');
+        if (pdfFrame) {
+            pdfFrame.addEventListener('error', function() {
+                document.getElementById('pdfLoader').innerHTML = `
+                        <div style="color: var(--light-gold); text-align: center;">
+                            <div style="font-size: 50px; margin-bottom: 20px; color: var(--medium-gold);">📄</div>
+                            <p style="font-size: 18px; margin-bottom: 15px;">Не удалось загрузить договор</p>
+                            <p style="color: var(--pale-gold); margin-bottom: 20px;">
+                                <a href="#" style="color: var(--medium-gold); text-decoration: underline;">
+                                    Скачать договор PDF
+                                </a>
+                            </p>
+                        </div>
+                    `;
+            });
+        }
+    });
+</script>
+</body>
+</html>
