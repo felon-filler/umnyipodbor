@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умный подбор | Контакты</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Хедер -->
+<header class="header" id="header">
+    <div class="container header-container">
+        <a href="index.html" class="logo">Умный<span> подбор</span></a>
+
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="about.html" class="nav-link">О компании</a>
+            <a href="contacts.html" class="nav-link active">Контакты</a>
+        </nav>
+
+        <a href="contacts.html" class="header-cta">Связаться</a>
+
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+        <a href="index.html" class="nav-link">Главная</a>
+        <a href="about.html" class="nav-link">О компании</a>
+        <a href="contacts.html" class="nav-link active">Контакты</a>
+    </div>
+</header>
+
+<main>
+    <!-- Заголовок -->
+    <section class="section" style="padding-top: 150px;">
+        <div class="container">
+            <h1 class="section-title fade-up"><span>Контакты</span></h1>
+            <p class="section-subtitle fade-up">Свяжитесь с нами любым удобным способом</p>
+        </div>
+    </section>
+
+    <!-- Контактная информация и форма -->
+    <section class="section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info fade-up">
+                    <h2 style="font-family: 'Playfair Display'; font-size: 2.2rem; color: var(--light-gold); margin-bottom: 40px;">Наши контакты</h2>
+
+                    <div class="contact-info-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-text">
+                            <h3>Max</h3>
+                            <p><a href="tel:+79655830566">8 (965) 583-05-66</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-text">
+                            <h3>Офис (общие вопросы)</h3>
+                            <p><a href="tel:+79655830566">8 (965) 583-05-66</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <p><a href="mailto:umnyi.podbor@mail.ru">umnyi.podbor@mail.ru</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-text">
+                            <h3>Telegram</h3>
+                            <p><a href="https://t.me/+79655830564">8 (965) 583-05-64</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-text">
+                            <h3>Адрес</h3>
+                            <p>Москва, ул. Тверская, 12, БЦ «Премиум», офис 405</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-icon">🕒</div>
+                        <div class="contact-text">
+                            <h3>Режим работы</h3>
+                            <p>Пн-Пт: 10:00 - 19:00</p>
+                            <p>Сб-Вс: по договоренности</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form fade-up">
+                    <h3 style="font-family: 'Playfair Display'; font-size: 2rem; color: var(--light-gold); margin-bottom: 30px;">Напишите нам</h3>
+
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Ваше имя" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Телефон">
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Ваше сообщение" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Карта -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title fade-up"><span>Как нас найти</span></h2>
+            <div class="map-container fade-up">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.252421699048!2d37.60322331591724!3d55.7620229802552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a4725e6b5e1%3A0x4c0e39b5f3b5f5f5!2z0JzQvtGB0LrQstCwLCDQotCy0LXRgNGB0LrQsNGPINGD0LsuLCAxMiwg0JzQvtGB0LrQstCw!5e0!3m2!1sru!2sru!4v1634567890123!5m2!1sru!2sru" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Футер -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <a href="index.html" class="footer-logo">Умный<span> подбор</span></a>
+                <p>Премиальное агентство по подбору персонала. Находим лучших специалистов для ведущих компаний с 2012 года.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">in</a>
+                    <a href="#" class="social-link">tg</a>
+                    <a href="#" class="social-link">wa</a>
+                </div>
+            </div>
+
+            <div>
+                <h3>Меню</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О компании</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Услуги</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Executive Search</a></li>
+                    <li><a href="#">Подбор специалистов</a></li>
+                    <li><a href="#">Аудит HR</a></li>
+                    <li><a href="#">Аутстаффинг</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Контакты</h3>
+                <div class="footer-contacts">
+                    <p>📞 Max: <a href="tel:+79655830566">8 (965) 583-05-66</a></p>
+                    <p>📞 Офис: <a href="tel:+79655830566">8 (965) 583-05-66</a></p>
+                    <p>✉️ <a href="mailto:umnyi.podbor@mail.ru">umnyi.podbor@mail.ru</a></p>
+                    <p>📱 Telegram: <a href="https://t.me/+79655830564">8 (965) 583-05-64</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 Умный подбор. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Бургер-меню
+    const burger = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    burger.addEventListener('click', () => {
+        mobileNav.classList.toggle('active');
+        burger.classList.toggle('active');
+    });
+
+    // Анимация при скролле
+    const fadeElements = document.querySelectorAll('.fade-up');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+
+    // Обработка формы
+    const form = document.getElementById('contactForm');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Спасибо за обращение! Мы свяжемся с вами в ближайшее время.');
+            form.reset();
+        });
+    }
+</script>
+</body>
+</html>

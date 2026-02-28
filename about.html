@@ -3,31 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О компании — Umnyipodbor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Умный подбор | О компании</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-    <div class="logo">Umnyipodbor</div>
-    <nav>
-        <a href="index.html">Главная</a>
-        <a href="about.html">О компании</a>
-        <a href="services.html">Услуги</a>
-        <a href="reviews.html">Отзывы</a>
-        <a href="contact.html">Контакты</a>
-    </nav>
-</header>
-<section class="page-header">
-    <h1>Наша история и философия</h1>
-</section>
-<section>
-    <div class="card">
-        <p>Umnyipodbor основан в 2014 году бывшими HR-директорами международных компаний. Мы создали агентство премиального подбора для собственников бизнеса и советов директоров.</p>
-        <p>За годы работы реализовано более 1200 проектов в сферах IT, финансов, девелопмента и промышленности.</p>
-        <p>Мы применяем авторскую методику глубинной оценки компетенций и стратегического соответствия кандидата бизнес‑целям компании.</p>
+<!-- Хедер (такой же как на главной) -->
+<header class="header" id="header">
+    <div class="container header-container">
+        <a href="index.html" class="logo">Умный<span> подбор</span></a>
+
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="about.html" class="nav-link active">О компании</a>
+            <a href="contacts.html" class="nav-link">Контакты</a>
+        </nav>
+
+        <a href="contacts.html" class="header-cta">Связаться</a>
+
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </div>
-</section>
-<footer>© 2026 Umnyipodbor</footer>
+
+    <div class="mobile-nav" id="mobileNav">
+        <a href="index.html" class="nav-link">Главная</a>
+        <a href="about.html" class="nav-link active">О компании</a>
+        <a href="contacts.html" class="nav-link">Контакты</a>
+    </div>
+</header>
+
+<main>
+    <!-- Заголовок страницы -->
+    <section class="section" style="padding-top: 150px;">
+        <div class="container">
+            <h1 class="section-title fade-up"><span>О компании</span></h1>
+            <p class="section-subtitle fade-up">Умный подбор — ваш надежный партнер в поиске талантов</p>
+        </div>
+    </section>
+
+    <!-- Миссия и история -->
+    <section class="section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text fade-up">
+                    <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--light-gold); margin-bottom: 30px;">Наша миссия</h2>
+                    <p>Мы создаем будущее российского бизнеса, соединяя лучшие таланты с ведущими компаниями. Наша миссия — сделать процесс подбора персонала прозрачным, эффективным и комфортным для всех сторон.</p>
+                    <p>Компания «Умный подбор» основана в 2012 году командой профессиональных HR-экспертов. За 12 лет работы мы закрыли более 1000 вакансий разного уровня сложности — от линейных специалистов до топ-менеджеров.</p>
+
+                    <div class="about-features" style="margin-top: 40px;">
+                        <div class="feature">
+                            <span class="feature-icon">✓</span>
+                            <h3>12 лет опыта</h3>
+                            <p>На рынке премиального подбора персонала</p>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">✓</span>
+                            <h3>350+ клиентов</h3>
+                            <p>Крупнейшие компании России и СНГ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-image fade-up">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Офис компании">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="section" style="background: var(--rich-black);">
+        <div class="container">
+            <h2 class="section-title fade-up"><span>Почему выбирают нас</span></h2>
+            <p class="section-subtitle fade-up">Наши конкурентные преимущества</p>
+
+            <div class="advantages-grid">
+                <div class="advantage-item fade-up">
+                    <div class="advantage-number">01</div>
+                    <h3>Глубокая экспертиза</h3>
+                    <p>Наши консультанты имеют опыт работы в найме в крупнейших компаниях и понимают специфику рынка.</p>
+                </div>
+                <div class="advantage-item fade-up">
+                    <div class="advantage-number">02</div>
+                    <h3>Индивидуальный подход</h3>
+                    <p>Каждый запрос уникален. Мы разрабатываем стратегию поиска под конкретные задачи бизнеса.</p>
+                </div>
+                <div class="advantage-item fade-up">
+                    <div class="advantage-number">03</div>
+                    <h3>Конфиденциальность</h3>
+                    <p>Гарантируем полную анонимность при работе с чувствительными вакансиями.</p>
+                </div>
+                <div class="advantage-item fade-up">
+                    <div class="advantage-number">04</div>
+                    <h3>Скорость закрытия</h3>
+                    <p>Средний срок закрытия вакансии — 21 день. В 70% случаев мы находим кандидата быстрее.</p>
+                </div>
+                <div class="advantage-item fade-up">
+                    <div class="advantage-number">05</div>
+                    <h3>Глубокая проверка</h3>
+                    <p>Многоступенчатая система оценки: от проверки рекомендаций до профессиональных тестов.</p>
+                </div>
+                <div class="advantage-item fade-up">
+                    <div class="advantage-number">06</div>
+                    <h3>Гарантия качества</h3>
+                    <p>Даем гарантию на кандидатов до 6 месяцев. Заменим бесплатно, если специалист не подойдет.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Команда -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title fade-up"><span>Наша команда</span></h2>
+            <p class="section-subtitle fade-up">Эксперты с безупречной репутацией</p>
+
+            <div class="team-grid">
+                <div class="team-card fade-up">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Максим" class="team-image">
+                    <div class="team-info">
+                        <h3>Максим</h3>
+                        <p class="position">Управляющий партнер</p>
+                        <p>12 лет в рекрутменте. Эксперт по подбору топ-менеджмента.</p>
+                    </div>
+                </div>
+
+                <div class="team-card fade-up">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Екатерина" class="team-image">
+                    <div class="team-info">
+                        <h3>Екатерина</h3>
+                        <p class="position">Старший консультант</p>
+                        <p>Специализация: IT и цифровые профессии.</p>
+                    </div>
+                </div>
+
+                <div class="team-card fade-up">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Дмитрий" class="team-image">
+                    <div class="team-info">
+                        <h3>Дмитрий</h3>
+                        <p class="position">Консультант</p>
+                        <p>Подбор производственного и инженерного персонала.</p>
+                    </div>
+                </div>
+
+                <div class="team-card fade-up">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Анна" class="team-image">
+                    <div class="team-info">
+                        <h3>Анна</h3>
+                        <p class="position">HR-аналитик</p>
+                        <p>Оценка персонала, проведение ассессмент-центров.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Футер (такой же как на главной) -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <a href="index.html" class="footer-logo">Умный<span> подбор</span></a>
+                <p>Премиальное агентство по подбору персонала. Находим лучших специалистов для ведущих компаний с 2012 года.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">in</a>
+                    <a href="#" class="social-link">tg</a>
+                    <a href="#" class="social-link">wa</a>
+                </div>
+            </div>
+
+            <div>
+                <h3>Меню</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О компании</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Услуги</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Executive Search</a></li>
+                    <li><a href="#">Подбор специалистов</a></li>
+                    <li><a href="#">Аудит HR</a></li>
+                    <li><a href="#">Аутстаффинг</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Контакты</h3>
+                <div class="footer-contacts">
+                    <p>📞 Max: <a href="tel:+79655830566">8 (965) 583-05-66</a></p>
+                    <p>📞 Офис: <a href="tel:+79655830566">8 (965) 583-05-66</a></p>
+                    <p>✉️ <a href="mailto:umnyi.podbor@mail.ru">umnyi.podbor@mail.ru</a></p>
+                    <p>📱 Telegram: <a href="https://t.me/+79655830564">8 (965) 583-05-64</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 Умный подбор. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Бургер-меню
+    const burger = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    burger.addEventListener('click', () => {
+        mobileNav.classList.toggle('active');
+        burger.classList.toggle('active');
+    });
+
+    // Анимация при скролле
+    const fadeElements = document.querySelectorAll('.fade-up');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+</script>
 </body>
 </html>
